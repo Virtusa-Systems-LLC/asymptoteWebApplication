@@ -2,6 +2,7 @@ import { existsSync, createReadStream, appendFile } from "fs";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import express from "express";
+import cors from "cors";
 import expressStaticGzip from "express-static-gzip";
 import { dateTime, dropRootPermission } from "./serverUtil.js";
 import { reqTypeRouter, reqAnalyzer, delAnalyzer, usrConnect, requestResolver, writeAsyFile, downloadReq } from "./serverAnalyzer.js";
@@ -15,6 +16,7 @@ const port = (process.env.ASYMPTOTE_PORT == undefined)? defaultPort: parseInt(pr
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Express Application
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const app = express();
+app.use(cors());
 // Serving Static html File & Running Major Requests
 // -------------------------------------------------
 app.route("/")
